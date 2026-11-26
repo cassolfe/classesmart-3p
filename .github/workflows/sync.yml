@@ -1,12 +1,9 @@
-name: Sincronizzazione Automatica ClasseViva
+name: Sincronizza ClasseViva
 
 on:
   schedule:
-    - cron: '30 13 * * *'
-    - cron: '30 15 * * *'
-    - cron: '30 16 * * *'
-    - cron: '30 17 * * *'
-    - cron: '30 18 * * *'
+    # Gira ogni 2 ore dalle 7:00 alle 21:00 (ora italiana)
+    - cron: '0 6,8,10,12,14,16,18,20 * * *'
   workflow_dispatch:
 
 jobs:
@@ -16,16 +13,18 @@ jobs:
       - name: Scarica codice
         uses: actions/checkout@v4
 
-      - name: Imposta Python
+      - name: Configura Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Installa libreria requests
-        run: pip install requests
+      - name: Installa librerie
+        run: pip install -r requirements.txt
 
-      - name: Esegui sincronizzazione
+      - name: Esegui sync.py
         env:
           CV_USER: ${{ secrets.CV_USER }}
           CV_PASS: ${{ secrets.CV_PASS }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: python sync.py
