@@ -833,5 +833,13 @@
 
     caricaTutto();
   </script>
+<script>
+  // Ricarica i dati automaticamente ogni volta che riapri l'app su iPhone
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && typeof caricaTutto === "function") {
+      caricaTutto();
+    }
+  });
+</script>
 </body>
 </html>
