@@ -1,0 +1,31 @@
+name: Sincronizzazione Automatica ClasseViva
+
+on:
+  schedule:
+    - cron: '30 13 * * *'
+    - cron: '30 15 * * *'
+    - cron: '30 16 * * *'
+    - cron: '30 17 * * *'
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica codice
+        uses: actions/checkout@v4
+
+      - name: Imposta Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa libreria requests
+        run: pip install requests
+
+      - name: Esegui sincronizzazione
+        env:
+          CV_USER: ${{ secrets.CV_USER }}
+          CV_PASS: ${{ secrets.CV_PASS }}
+        run: python sync.py
