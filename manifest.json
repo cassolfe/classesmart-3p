@@ -1,0 +1,17 @@
+{
+  "name": "ClasseSmart 3P",
+  "short_name": "ClasseSmart",
+  "start_url": "/classesmart-3p/",
+  "scope": "/classesmart-3p/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
