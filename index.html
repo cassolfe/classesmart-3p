@@ -3,7 +3,16 @@
 <head>
   <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" id="ios-icon">
+<script>
+  const c = document.createElement('canvas'); c.width = c.height = 512;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#1d4ed8'; ctx.fillRect(0, 0, 512, 512);
+  ctx.fillStyle = '#ffffff'; ctx.font = '800 220px sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('3P', 256, 276);
+  document.getElementById('ios-icon').href = c.toDataURL('image/png');
+</script>
 <meta name="theme-color" content="#2563eb">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
