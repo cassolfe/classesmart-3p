@@ -2,20 +2,20 @@
 <html lang="it">
 <head>
   <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/svg+xml" href="icon.svg">
-<link rel="apple-touch-icon" id="ios-icon">
-<script>
-  const c = document.createElement('canvas'); c.width = c.height = 512;
-  const ctx = c.getContext('2d');
-  ctx.fillStyle = '#1d4ed8'; ctx.fillRect(0, 0, 512, 512);
-  ctx.fillStyle = '#ffffff'; ctx.font = '800 220px sans-serif';
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('3P', 256, 276);
-  document.getElementById('ios-icon').href = c.toDataURL('image/png');
-</script>
-<meta name="theme-color" content="#2563eb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" id="ios-icon">
+  <script>
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#1d4ed8'; ctx.fillRect(0, 0, 512, 512);
+    ctx.fillStyle = '#ffffff'; ctx.font = '800 220px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('3P', 256, 276);
+    document.getElementById('ios-icon').href = c.toDataURL('image/png');
+  </script>
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ClasseSmart 3P</title>
@@ -35,7 +35,7 @@
       <div class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center font-extrabold text-sm">3P</div>
       <div>
         <h1 class="text-base font-bold leading-tight">ClasseSmart 3P</h1>
-        <p id="sottotitolo-header" class="text-xs text-red-100 capitalize">Agenda & Registro Personale</p>
+        <p id="sottotitolo-header" class="text-xs text-red-100 capitalize">Agenda, Zaino & Registro</p>
       </div>
     </div>
     <div id="azioni-agenda" class="flex gap-2">
@@ -51,10 +51,13 @@
   <!-- Navigazione Principale -->
   <nav class="sticky top-[56px] z-20 bg-white border-b border-slate-200 flex text-xs font-semibold text-slate-500 shadow-xs">
     <button id="tab-btn-agenda" onclick="cambiaSezione('agenda')" class="flex-1 py-3 text-center nav-active">
-      Agenda Classe 3P
+      Agenda 3P
+    </button>
+    <button id="tab-btn-zaino" onclick="cambiaSezione('zaino')" class="flex-1 py-3 text-center">
+      Zaino Domani
     </button>
     <button id="tab-btn-voti" onclick="cambiaSezione('voti')" class="flex-1 py-3 text-center">
-      I Miei Voti & Medie
+      Voti & Medie
     </button>
   </nav>
 
@@ -90,11 +93,12 @@
 
       <div id="griglia-calendario" class="grid grid-cols-7 gap-1 text-center"></div>
 
-      <div class="flex justify-center gap-4 mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-500 font-medium">
+      <div class="flex flex-wrap justify-center gap-3 mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-500 font-medium">
         <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-600"></span> Verifica</span>
-        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Nascosto</span>
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Da lezione</span>
         <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-600"></span> Compito</span>
-        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Nota / Volontari</span>
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-600"></span> Materiale</span>
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Nota</span>
       </div>
     </section>
 
@@ -115,13 +119,13 @@
       <div class="grid grid-cols-2 gap-2">
         <select id="nota-categoria" class="bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800 font-semibold">
           <option value="interrogazione">Interrogazione (con lista volontari)</option>
-          <option value="avviso">Avviso / Materiale</option>
+          <option value="avviso">Avviso / Materiale Zaino</option>
           <option value="appunti">Appunti / Link</option>
         </select>
         <input type="text" id="nota-materia" placeholder="Materia (es. Storia)" required class="bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800">
       </div>
       <input type="text" id="nota-autore" placeholder="Il tuo nome (opzionale)" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800">
-      <textarea id="nota-testo" rows="2" placeholder="Es. Interrogazione su cap. 3 (max 3 volontari) / Portare il libro..." required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800"></textarea>
+      <textarea id="nota-testo" rows="2" placeholder="Es. Portare il dizionario / Autorizzazione firmata / Interrogazione cap. 3..." required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 text-xs text-slate-800"></textarea>
       <button type="submit" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 rounded-lg text-xs transition">
         Salva sul Calendario della 3P
       </button>
@@ -135,7 +139,37 @@
   </main>
 
   <!-- ========================================== -->
-  <!-- SEZIONE 2: I MIEI VOTI & CALCOLO MEDIE     -->
+  <!-- SEZIONE 2: ZAINO PER DOMANI                -->
+  <!-- ========================================== -->
+  <main id="sezione-zaino" class="hidden max-w-lg mx-auto p-3 space-y-3.5">
+
+    <section class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white rounded-2xl p-4 shadow-sm flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded">Preparazione Zaino</span>
+        <h2 id="zaino-titolo-giorno" class="text-base font-extrabold mt-1 capitalize">Domani</h2>
+        <p id="zaino-stato-progresso" class="text-xs text-blue-100 mt-0.5">0 di 0 preparati</p>
+      </div>
+      <button onclick="resetSpunteZaino()" class="bg-white/15 hover:bg-white/25 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">
+        Azzera spunte
+      </button>
+    </section>
+
+    <!-- Avvisi Extra / Materiale / Autorizzazioni -->
+    <section id="zaino-box-avvisi" class="space-y-2"></section>
+
+    <!-- Materie in Orario -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 space-y-2.5">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xs font-extrabold text-slate-500 uppercase tracking-wide">Libri e quaderni in orario</h3>
+        <span class="text-[10px] text-slate-400 font-medium">Tocca per spuntare</span>
+      </div>
+      <div id="zaino-lista-materie" class="space-y-2"></div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- SEZIONE 3: I MIEI VOTI & CALCOLO MEDIE     -->
   <!-- ========================================== -->
   <main id="sezione-voti" class="hidden max-w-lg mx-auto p-3 space-y-4">
 
@@ -206,10 +240,21 @@
       "Content-Type": "application/json"
     };
 
+    // Orario settimanale 3P (1=Lunedì ... 6=Sabato)
+    const ORARIO_SETTIMANALE_3P = {
+      1: ["Italiano", "Inglese", "Filosofia", "Matematica", "Fisica", "Biology (Scienze)"],
+      2: ["Inglese", "Francese", "Storia", "Maths (Matematica)", "Scienze", "Arte / Disegno"],
+      3: ["Italiano", "Francese", "Storia", "Filosofia", "Scienze", "Arte / Disegno"],
+      4: ["Italiano", "Inglese", "Francese", "Filosofia", "Religione"],
+      5: ["Latino", "Matematica", "Scienze Motorie (Borsa palestra)"],
+      6: ["Inglese", "Matematica", "Fisica"]
+    };
+
     let tuttiCompiti = [];
     let tutteNote = [];
     let tutteLezioni = [];
     let completati = JSON.parse(localStorage.getItem("compiti_fatti_3p") || "[]");
+    let zainoSpuntati = JSON.parse(localStorage.getItem("zaino_spuntati_3p") || "{}");
 
     let oggiStr = new Date().toISOString().split("T")[0];
     let dataSelezionata = oggiStr;
@@ -219,17 +264,17 @@
     document.getElementById("voto-data").value = oggiStr;
 
     function cambiaSezione(sez) {
-      const isAgenda = sez === "agenda";
-      document.getElementById("sezione-agenda").classList.toggle("hidden", !isAgenda);
-      document.getElementById("sezione-voti").classList.toggle("hidden", isAgenda);
-      document.getElementById("azioni-agenda").classList.toggle("hidden", !isAgenda);
+      document.getElementById("sezione-agenda").classList.toggle("hidden", sez !== "agenda");
+      document.getElementById("sezione-zaino").classList.toggle("hidden", sez !== "zaino");
+      document.getElementById("sezione-voti").classList.toggle("hidden", sez !== "voti");
+      document.getElementById("azioni-agenda").classList.toggle("hidden", sez === "voti");
 
-      document.getElementById("tab-btn-agenda").classList.toggle("nav-active", isAgenda);
-      document.getElementById("tab-btn-voti").classList.toggle("nav-active", !isAgenda);
+      document.getElementById("tab-btn-agenda").classList.toggle("nav-active", sez === "agenda");
+      document.getElementById("tab-btn-zaino").classList.toggle("nav-active", sez === "zaino");
+      document.getElementById("tab-btn-voti").classList.toggle("nav-active", sez === "voti");
 
-      if (!isAgenda) {
-        renderVoti();
-      }
+      if (sez === "zaino") renderZaino();
+      if (sez === "voti") renderVoti();
     }
 
     function toggleFormNota() {
@@ -259,17 +304,164 @@
       renderGiorno();
     }
 
+    // --- FORMATTA NOME MATERIA (BIOLOGY LUNEDÌ / MATHS MARTEDÌ) ---
+    function formattaMateriaConInglese(materia, dataStr) {
+      if (!materia || !dataStr) return materia;
+      const d = new Date(dataStr + "T00:00:00");
+      const giorno = d.getDay(); // 1 = Lunedì, 2 = Martedì
+      const mUpper = materia.toUpperCase();
+      if (giorno === 1 && (mUpper.includes("SCIENZE") || mUpper.includes("BIOLOGIA"))) {
+        return `${materia} (Biology)`;
+      }
+      if (giorno === 2 && mUpper.includes("MATEMATICA")) {
+        return `${materia} (Maths)`;
+      }
+      return materia;
+    }
+
+    // --- ZAINO PER DOMANI ---
+    function getProssimoGiornoScuola() {
+      const domani = new Date();
+      domani.setDate(domani.getDate() + 1);
+      // Se domani è domenica (0), salta a lunedì
+      if (domani.getDay() === 0) {
+        domani.setDate(domani.getDate() + 1);
+      }
+      const yyyy = domani.getFullYear();
+      const mm = String(domani.getMonth() + 1).padStart(2, "0");
+      const dd = String(domani.getDate()).padStart(2, "0");
+      return {
+        dataStr: `${yyyy}-${mm}-${dd}`,
+        weekday: domani.getDay(),
+        etichetta: domani.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })
+      };
+    }
+
+    function toggleItemZaino(dataStr, itemKey) {
+      if (!zainoSpuntati[dataStr]) zainoSpuntati[dataStr] = [];
+      if (zainoSpuntati[dataStr].includes(itemKey)) {
+        zainoSpuntati[dataStr] = zainoSpuntati[dataStr].filter(k => k !== itemKey);
+      } else {
+        zainoSpuntati[dataStr].push(itemKey);
+      }
+      localStorage.setItem("zaino_spuntati_3p", JSON.stringify(zainoSpuntati));
+      renderZaino();
+    }
+
+    function resetSpunteZaino() {
+      const target = getProssimoGiornoScuola();
+      zainoSpuntati[target.dataStr] = [];
+      localStorage.setItem("zaino_spuntati_3p", JSON.stringify(zainoSpuntati));
+      renderZaino();
+    }
+
+    function renderZaino() {
+      const target = getProssimoGiornoScuola();
+      document.getElementById("zaino-titolo-giorno").textContent = target.etichetta;
+
+      const spuntatiOggi = zainoSpuntati[target.dataStr] || [];
+      const materieGiorno = ORARIO_SETTIMANALE_3P[target.weekday] || [];
+
+      // Cerca avvisi materiale/autorizzazioni (da sync.py o dalle note classe) + compiti/verifiche di quel giorno
+      const avvisiMateriale = tuttiCompiti.filter(c => c.data_scadenza === target.dataStr && c.tipo === "materiale");
+      const noteAvviso = tutteNote.filter(n => n.data_riferimento === target.dataStr && n.categoria === "avviso");
+      const compitiDelGiorno = tuttiCompiti.filter(c => c.data_scadenza === target.dataStr && c.tipo !== "materiale");
+
+      let totalItems = materieGiorno.length + avvisiMateriale.length + noteAvviso.length;
+      let checkedItems = 0;
+
+      // 1. Box Avvisi Extra / Autorizzazioni / Materiali speciali
+      const boxAvvisi = document.getElementById("zaino-box-avvisi");
+      let avvisiHtml = "";
+
+      if (avvisiMateriale.length > 0 || noteAvviso.length > 0) {
+        avvisiHtml += `<div class="bg-purple-50 border border-purple-200 rounded-2xl p-3.5 space-y-2">
+          <p class="text-[11px] font-extrabold text-purple-900 uppercase tracking-wide">⚠️ Da non dimenticare (Avvisi & Autorizzazioni)</p>`;
+
+        avvisiMateriale.forEach(a => {
+          const key = "mat_" + a.id;
+          const isChecked = spuntatiOggi.includes(key);
+          if (isChecked) checkedItems++;
+          const matLabel = formattaMateriaConInglese(a.materia, target.dataStr);
+          avvisiHtml += `
+            <div onclick="toggleItemZaino('${target.dataStr}', '${key}')" class="cursor-pointer flex items-start gap-2.5 bg-white border border-purple-200 rounded-xl p-2.5 transition ${isChecked ? 'opacity-50 line-through' : ''}">
+              <input type="checkbox" ${isChecked ? "checked" : ""} class="mt-0.5 w-4 h-4 accent-purple-700 pointer-events-none">
+              <div class="text-xs">
+                <span class="font-extrabold text-purple-950 block">${matLabel}</span>
+                <span class="text-slate-700">${a.descrizione}</span>
+              </div>
+            </div>`;
+        });
+
+        noteAvviso.forEach(n => {
+          const key = "nota_" + n.id;
+          const isChecked = spuntatiOggi.includes(key);
+          if (isChecked) checkedItems++;
+          avvisiHtml += `
+            <div onclick="toggleItemZaino('${target.dataStr}', '${key}')" class="cursor-pointer flex items-start gap-2.5 bg-white border border-emerald-200 rounded-xl p-2.5 transition ${isChecked ? 'opacity-50 line-through' : ''}">
+              <input type="checkbox" ${isChecked ? "checked" : ""} class="mt-0.5 w-4 h-4 accent-emerald-700 pointer-events-none">
+              <div class="text-xs">
+                <span class="font-extrabold text-emerald-950 block">${n.materia} (Avviso 3P)</span>
+                <span class="text-slate-700">${n.testo}</span>
+              </div>
+            </div>`;
+        });
+
+        avvisiHtml += `</div>`;
+      }
+      boxAvvisi.innerHTML = avvisiHtml;
+
+      // 2. Lista Materie in Orario (con indicazione se c'è compito o verifica per quella materia)
+      const listaMatContainer = document.getElementById("zaino-lista-materie");
+      let matHtml = "";
+
+      materieGiorno.forEach((mat, i) => {
+        const key = "sub_" + i;
+        const isChecked = spuntatiOggi.includes(key);
+        if (isChecked) checkedItems++;
+
+        const matUpper = mat.toUpperCase();
+        const extraCompiti = compitiDelGiorno.filter(c => {
+          const cm = c.materia.toUpperCase();
+          if (matUpper.includes("SCIENZE") && (cm.includes("SCIENZE") || cm.includes("BIOLOGIA"))) return true;
+          if (matUpper.includes("MATEMATICA") && cm.includes("MATEMATICA")) return true;
+          if (matUpper.includes("ARTE") && (cm.includes("ARTE") || cm.includes("DISEGNO"))) return true;
+          if (matUpper.includes("MOTORIE") && (cm.includes("MOTORIE") || cm.includes("EDUCAZIONE FISICA"))) return true;
+          return cm.includes(matUpper.split(" ")[0]);
+        });
+
+        let badgeExtra = "";
+        if (extraCompiti.some(c => c.tipo === "verifica")) {
+          badgeExtra = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-700">Verifica!</span>`;
+        } else if (extraCompiti.length > 0) {
+          badgeExtra = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-700">Compiti</span>`;
+        }
+
+        matHtml += `
+          <div onclick="toggleItemZaino('${target.dataStr}', '${key}')" class="cursor-pointer flex items-center justify-between p-3 rounded-xl border ${isChecked ? 'bg-slate-50 border-slate-200 opacity-50 line-through' : 'bg-white border-slate-200 hover:bg-slate-50'} transition">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" ${isChecked ? "checked" : ""} class="w-4 h-4 accent-indigo-700 pointer-events-none">
+              <span class="text-xs font-bold text-slate-800">${mat}</span>
+            </div>
+            ${badgeExtra}
+          </div>
+        `;
+      });
+
+      listaMatContainer.innerHTML = matHtml;
+      document.getElementById("zaino-stato-progresso").textContent = `${checkedItems} di ${totalItems} elementi nello zaino`;
+    }
+
     // --- CONTO ALLA ROVESCIA VERIFICHE ---
     function renderCountdown() {
       const banner = document.getElementById("banner-countdown");
       const oggiDate = new Date(oggiStr + "T00:00:00");
 
-      // Cerca tra verifiche ufficiali e interrogazioni segnalate dalla classe da oggi in poi
       const verificheFuture = tuttiCompiti
         .filter(c => c.tipo === "verifica" && c.data_scadenza >= oggiStr)
         .map(c => ({
           data: c.data_scadenza,
-          materia: c.materia,
+          materia: formattaMateriaConInglese(c.materia, c.data_scadenza),
           desc: c.descrizione
         }));
 
@@ -373,6 +565,28 @@
       await caricaTutto();
     }
 
+    async function aggiungiNota(event) {
+      event.preventDefault();
+      const payload = {
+        data_riferimento: dataSelezionata,
+        categoria: document.getElementById("nota-categoria").value,
+        materia: document.getElementById("nota-materia").value.trim().toUpperCase(),
+        autore: document.getElementById("nota-autore").value.trim(),
+        testo: document.getElementById("nota-testo").value.trim()
+      };
+
+      await fetch(`${SUPABASE_URL}/rest/v1/note_classe`, {
+        method: "POST",
+        headers: HEADERS,
+        body: JSON.stringify(payload)
+      });
+
+      document.getElementById("nota-materia").value = "";
+      document.getElementById("nota-testo").value = "";
+      document.getElementById("form-nota").classList.add("hidden");
+      await caricaTutto();
+    }
+
     // --- LOGICA CALENDARIO ---
     function vaiOggi() {
       const now = new Date();
@@ -422,8 +636,9 @@
         const noteGiorno = tutteNote.filter(n => n.data_riferimento === dataStr);
 
         const hasVerifica = compitiGiorno.some(c => c.tipo === "verifica");
-        const hasEstratto = compitiGiorno.some(c => c.fonte === "estratto_lezione");
-        const hasCompito = compitiGiorno.some(c => c.tipo !== "verifica" && c.fonte !== "estratto_lezione");
+        const hasMateriale = compitiGiorno.some(c => c.tipo === "materiale");
+        const hasEstratto = compitiGiorno.some(c => c.tipo === "compito" && c.fonte === "estratto_lezione");
+        const hasCompito = compitiGiorno.some(c => c.tipo === "compito" && c.fonte !== "estratto_lezione");
         const hasNota = noteGiorno.length > 0;
 
         const isSelected = dataStr === dataSelezionata;
@@ -445,6 +660,7 @@
               ${hasVerifica ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-red-600'}"></span>` : ''}
               ${hasEstratto ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-amber-200' : 'bg-amber-500'}"></span>` : ''}
               ${hasCompito ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-sky-200' : 'bg-blue-600'}"></span>` : ''}
+              ${hasMateriale ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-purple-200' : 'bg-purple-600'}"></span>` : ''}
               ${hasNota ? `<span class="w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-emerald-200' : 'bg-emerald-500'}"></span>` : ''}
             </div>
           </div>
@@ -517,11 +733,13 @@
         `;
       });
 
-      // 2. Compiti e Verifiche
+      // 2. Compiti, Verifiche e Materiali Zaino
       compitiGiorno.forEach((c, idx) => {
         const isFatto = completati.includes(c.id);
         const isVerifica = c.tipo === "verifica";
+        const isMateriale = c.tipo === "materiale";
         const isEstratto = c.fonte === "estratto_lezione";
+        const materiaMostrata = formattaMateriaConInglese(c.materia, dataSelezionata);
 
         let borderCol = "border-blue-600 bg-white";
         let badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">COMPITO / AVVISO</span>`;
@@ -529,6 +747,9 @@
         if (isVerifica) {
           borderCol = "border-red-600 bg-red-50/60";
           badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-600 text-white">VERIFICA</span>`;
+        } else if (isMateriale) {
+          borderCol = "border-purple-600 bg-purple-50/70";
+          badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-200 text-purple-900">ZAINO / MATERIALE</span>`;
         } else if (isEstratto) {
           borderCol = "border-amber-500 bg-amber-50/60";
           badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-200 text-amber-900">ESTRATTO DA LEZIONE</span>`;
@@ -565,7 +786,7 @@
         html += `
           <div onclick="toggleFatto('${c.id}')" class="cursor-pointer border-l-4 ${borderCol} rounded-r-xl p-3.5 shadow-sm transition active:scale-[0.99] ${isFatto ? 'done-card' : ''}">
             <div class="flex justify-between items-center gap-2 mb-1">
-              <span class="text-xs font-extrabold text-slate-900">${c.materia}</span>
+              <span class="text-xs font-extrabold text-slate-900">${materiaMostrata}</span>
               ${badge}
             </div>
             <p class="text-xs text-slate-800 font-medium leading-relaxed">${testoCompito}</p>
@@ -578,9 +799,10 @@
       if (lezioniGiorno.length > 0) {
         html += `<div class="pt-2"><p class="text-[11px] font-bold text-slate-400 uppercase mb-2 px-1">Argomenti svolti in classe</p><div class="space-y-2">`;
         lezioniGiorno.forEach(l => {
+          const matLez = formattaMateriaConInglese(l.materia, dataSelezionata);
           html += `
             <div class="bg-white border border-slate-200 rounded-xl p-3">
-              <span class="text-xs font-bold text-slate-700 block mb-0.5">${l.materia}</span>
+              <span class="text-xs font-bold text-slate-700 block mb-0.5">${matLez}</span>
               <p class="text-xs text-slate-600">${l.argomento}</p>
             </div>
           `;
@@ -683,12 +905,20 @@
         countGen.textContent = "0 voti inseriti";
         container.innerHTML = `
           <div class="bg-white border border-slate-200 rounded-2xl p-8 text-center">
-            <p class="text-sm font-medium text-slate-600">Nessun voto registrato.</p>
-            <p class="text-xs text-slate-400 mt-1">Clicca su "+ Aggiungi un Voto" per calcolare medie e voti necessari.</p>
+            <p class="text-sm font-medium text-slate-500">Nessun voto registrato.</p>
+            <p class="text-xs text-slate-400 mt-1">Tocca "+ Aggiungi un Voto" per calcolare le medie.</p>
           </div>
         `;
         return;
       }
+
+      const sommaTot = mieiVoti.reduce((acc, v) => acc + v.valore, 0);
+      const mediaGen = sommaTot / mieiVoti.length;
+      const colGen = coloreVoto(mediaGen);
+
+      cerchioGen.textContent = mediaGen.toFixed(2);
+      cerchioGen.className = `w-16 h-16 rounded-full flex items-center justify-center text-lg font-extrabold border-4 ${colGen.border} ${colGen.text} ${colGen.light}`;
+      countGen.textContent = `${mieiVoti.length} ${mieiVoti.length === 1 ? 'voto inserito' : 'voti inseriti'}`;
 
       const perMateria = {};
       mieiVoti.forEach(v => {
@@ -696,150 +926,82 @@
         perMateria[v.materia].push(v);
       });
 
-      const materieNomi = Object.keys(perMateria).sort();
-      let sommaMedieMaterie = 0;
-
-      const cardsHtml = materieNomi.map((mat, idx) => {
+      let html = "";
+      Object.keys(perMateria).sort().forEach((mat, idx) => {
         const votiMat = perMateria[mat];
-        const somma = votiMat.reduce((acc, v) => acc + v.valore, 0);
+        const somma = votiMat.reduce((s, v) => s + v.valore, 0);
         const media = somma / votiMat.length;
-        sommaMedieMaterie += media;
-
         const col = coloreVoto(media);
-        const votoPerSei = 6 * (votiMat.length + 1) - somma;
-
-        let messaggioRapido = "";
-        if (media >= 6) {
-          const margine = somma - 6 * votiMat.length;
-          messaggioRapido = `<span class="text-emerald-700">Media sufficiente (+${margine.toFixed(2)} punti di margine)</span>`;
-        } else {
-          messaggioRapido = votoPerSei <= 10
-            ? `<span class="text-red-700 font-bold">Per arrivare al 6.0 devi prendere almeno ${votoPerSei.toFixed(2)}</span>`
-            : `<span class="text-red-700 font-bold">Servono almeno due verifiche per recuperare il 6.0</span>`;
-        }
+        const matId = `mat-${idx}`;
 
         const badgesVoti = votiMat.map(v => {
           const cV = coloreVoto(v.valore);
           return `
-            <div class="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
-              <span class="w-6 h-6 rounded-full ${cV.bg} text-white font-bold flex items-center justify-center text-[11px]">${v.display}</span>
-              <div class="text-left">
-                <span class="text-[10px] font-bold text-slate-700 block leading-none">${v.tipo}</span>
-                <span class="text-[9px] text-slate-400">${v.nota || v.data || ''}</span>
-              </div>
-              <button onclick="eliminaVoto(${v.id})" title="Elimina voto" class="text-slate-400 hover:text-red-600 font-bold ml-1 text-xs">×</button>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border ${cV.border} ${cV.light} text-xs">
+              <span class="font-extrabold ${cV.text}">${v.display}</span>
+              <span class="text-[10px] text-slate-500">${v.tipo}</span>
+              <button onclick="eliminaVoto(${v.id})" class="text-slate-400 hover:text-red-600 font-bold ml-1">×</button>
             </div>
           `;
         }).join("");
 
-        return `
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
+        html += `
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 space-y-3">
             <div class="flex justify-between items-center">
               <div>
                 <h3 class="text-sm font-extrabold text-slate-900">${mat}</h3>
-                <p class="text-[11px] mt-0.5">${messaggioRapido}</p>
+                <p class="text-[11px] text-slate-400">${votiMat.length} ${votiMat.length === 1 ? 'valutazione' : 'valutazioni'}</p>
               </div>
-              <div class="w-12 h-12 rounded-full ${col.light} border-2 ${col.border} ${col.text} flex items-center justify-center font-extrabold text-sm">
-                ${media.toFixed(2)}
-              </div>
+              <span class="px-3 py-1 rounded-xl text-sm font-black text-white ${col.bg}">${media.toFixed(2)}</span>
             </div>
-
-            <div class="flex flex-wrap gap-2 pt-1">
-              ${badgesVoti}
+            <div class="flex flex-wrap gap-1.5">${badgesVoti}</div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 text-[11px]">
+              <span class="text-slate-500">Obiettivo media:</span>
+              <select id="target-${matId}" onchange="aggiornaObiettivo('${matId}', ${somma}, ${votiMat.length})" class="bg-slate-50 border border-slate-300 rounded px-2 py-0.5 font-bold text-slate-800">
+                <option value="6">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7.0</option>
+                <option value="7.5">7.5</option>
+                <option value="8">8.0</option>
+                <option value="9">9.0</option>
+              </select>
             </div>
-
-            <div class="bg-slate-50 rounded-xl p-2.5 border border-slate-200/80 flex flex-col gap-1.5">
-              <div class="flex items-center justify-between text-[11px] text-slate-600">
-                <span>Calcola voto per media obiettivo:</span>
-                <select id="target-${idx}" onchange="aggiornaObiettivo(${idx}, ${somma}, ${votiMat.length})" class="bg-white border border-slate-300 rounded px-2 py-0.5 font-bold text-slate-800">
-                  <option value="6" selected>6.0 (Sufficienza)</option>
-                  <option value="6.5">6.5</option>
-                  <option value="7">7.0</option>
-                  <option value="7.5">7.5</option>
-                  <option value="8">8.0</option>
-                  <option value="8.5">8.5</option>
-                  <option value="9">9.0</option>
-                </select>
-              </div>
-              <p id="out-${idx}" class="text-[11px] text-slate-700">
-                ${votoPerSei <= 1 ? 'Anche con un 2 resti sopra il 6.0.' : (votoPerSei > 10 ? `Servirebbe ${votoPerSei.toFixed(2)} (servono più verifiche).` : `Prossimo voto necessario per la media <strong>6.0</strong>: <span class="px-2 py-0.5 rounded bg-slate-800 text-white font-extrabold">${votoPerSei.toFixed(2)}</span>`)}
-              </p>
-            </div>
+            <p id="out-${matId}" class="text-[11px] text-slate-600"></p>
           </div>
         `;
-      }).join("");
-
-      const mediaGenerale = sommaMedieMaterie / materieNomi.length;
-      const colGen = coloreVoto(mediaGenerale);
-
-      cerchioGen.textContent = mediaGenerale.toFixed(2);
-      cerchioGen.className = `w-16 h-16 rounded-full flex items-center justify-center text-lg font-extrabold border-4 ${colGen.border} ${colGen.light} ${colGen.text}`;
-      countGen.textContent = `${mieiVoti.length} voti in ${materieNomi.length} materie`;
-
-      container.innerHTML = cardsHtml;
-    }
-
-    async function aggiungiNota(e) {
-      e.preventDefault();
-      const payload = {
-        data_riferimento: dataSelezionata,
-        categoria: document.getElementById("nota-categoria").value,
-        materia: document.getElementById("nota-materia").value.toUpperCase(),
-        autore: document.getElementById("nota-autore").value || "Studente 3P",
-        testo: document.getElementById("nota-testo").value
-      };
-
-      await fetch(`${SUPABASE_URL}/rest/v1/note_classe`, {
-        method: "POST",
-        headers: HEADERS,
-        body: JSON.stringify(payload)
       });
 
-      document.getElementById("nota-testo").value = "";
-      document.getElementById("form-nota").classList.add("hidden");
-      await caricaTutto();
+      container.innerHTML = html;
+      Object.keys(perMateria).sort().forEach((mat, idx) => {
+        const votiMat = perMateria[mat];
+        const somma = votiMat.reduce((s, v) => s + v.valore, 0);
+        aggiornaObiettivo(`mat-${idx}`, somma, votiMat.length);
+      });
     }
 
+    // --- CARICAMENTO DATI DA SUPABASE ---
     async function caricaTutto() {
-      renderCalendario();
-      renderGiorno();
-
       try {
         const [resCompiti, resNote, resLezioni] = await Promise.all([
-          fetch(`${SUPABASE_URL}/rest/v1/compiti?order=data_scadenza.asc`, { headers: HEADERS }),
-          fetch(`${SUPABASE_URL}/rest/v1/note_classe?order=data_riferimento.asc`, { headers: HEADERS }),
-          fetch(`${SUPABASE_URL}/rest/v1/lezioni?order=data.desc&limit=100`, { headers: HEADERS })
+          fetch(`${SUPABASE_URL}/rest/v1/compiti?select=*&order=data_scadenza.asc`, { headers: HEADERS }),
+          fetch(`${SUPABASE_URL}/rest/v1/note_classe?select=*&order=id.asc`, { headers: HEADERS }),
+          fetch(`${SUPABASE_URL}/rest/v1/lezioni?select=*&order=data.desc`, { headers: HEADERS })
         ]);
 
-        const dataCompiti = await resCompiti.json();
-        const dataNote = await resNote.json();
-        const dataLezioni = await resLezioni.json();
-
-        tuttiCompiti = Array.isArray(dataCompiti) ? dataCompiti : [];
-        tutteNote = Array.isArray(dataNote) ? dataNote : [];
-        tutteLezioni = Array.isArray(dataLezioni) ? dataLezioni : [];
+        tuttiCompiti = resCompiti.ok ? await resCompiti.json() : [];
+        tutteNote = resNote.ok ? await resNote.json() : [];
+        tutteLezioni = resLezioni.ok ? await resLezioni.json() : [];
 
         renderCountdown();
         renderCalendario();
         renderGiorno();
+        renderZaino();
       } catch (err) {
-        document.getElementById("contenuto-giorno").innerHTML = `
-          <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-700">
-            Errore di connessione al database: ${err.message}
-          </div>
-        `;
+        console.error("Errore caricamento dati:", err);
       }
     }
 
     caricaTutto();
   </script>
-<script>
-  // Ricarica i dati automaticamente ogni volta che riapri l'app su iPhone
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible" && typeof caricaTutto === "function") {
-      caricaTutto();
-    }
-  });
-</script>
 </body>
 </html>
